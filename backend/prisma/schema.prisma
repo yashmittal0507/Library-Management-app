@@ -1,0 +1,60 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model User {
+    id        String   @id @default(uuid())
+    email     String   @unique
+    password  String
+    name      String?
+    role      Role     @default(USER)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    borrowRecords BorrowRecord[]
+}
+
+enum Role {
+    USER
+    ADMIN
+}
+
+model Author {
+    id        String   @id @default(uuid())
+    name      String
+    bio       String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    books Book[]
+}
+
+model Book {
+    id        String   @id @default(uuid())
+    title     String
+    isbn      String   @unique
+    quantity  Int      @default(1)
+    available Int      @default(1)
+    authorId  String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    author        Author         @relation(fields: [authorId], references: [id])
+    borrowRecords BorrowRecord[]
+}
+
+model BorrowRecord {
+    id         String    @id @default(uuid())
+    userId     String
+    bookId     String
+    borrowedAt DateTime  @default(now())
+    returnedAt DateTime?
+
+    user User @relation(fields: [userId], references: [id])
+    book Book @relation(fields: [bookId], references: [id])
+}
