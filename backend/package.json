@@ -1,25 +1,31 @@
 {
   "scripts": {
-    "test:db": "tsx test-connection.ts"
+    "test:db": "tsx test-connection.ts",
+    "start:api-gateway": "tsx apps/api-gateway/src/main.ts",
+    "start:library-service": "tsx apps/library-service/src/main.ts",
+    "start:auth-service": "tsx apps/auth-service/src/main.ts"
   },
   "dependencies": {
     "@nestjs/config": "^4.0.2",
     "@nestjs/jwt": "^11.0.1",
     "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.1.9",
+    "@nestjs/swagger": "^11.2.3",
     "@prisma/adapter-pg": "^7.0.1",
-    "@prisma/client": "^7.0.1",
+    "@prisma/client": "^7.1.0",
     "@types/bcrypt": "^6.0.0",
     "@types/passport-jwt": "^4.0.1",
     "bcrypt": "^6.0.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "@types/pg": "^8.15.6",
     "dotenv": "^17.2.3",
-    "prisma": "^7.0.1",
+    "prisma": "^7.1.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
